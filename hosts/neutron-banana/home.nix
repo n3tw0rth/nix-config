@@ -13,8 +13,8 @@
   programs.bash = {
 	enable = true;
 	shellAliases = {
- vi  = "nvim";
-lg = "lazygit";
+      vi  = "nvim";
+      lg = "lazygit";
 };
 
 bashrcExtra = ''
@@ -45,11 +45,11 @@ wayland.windowManager.sway = {
 
 programs.tmux = {
   enable = true;
-  plugins = with pkgs.tmuxPlugins; [
-    sensible
-    resurrect
-    tmux-fzf
-    fzf-tmux-url
+  plugins = with pkgs; [
+ tmuxPlugins.sensible
+  tmuxPlugins.resurrect
+ tmuxPlugins.tmux-fzf
+ tmuxPlugins.fzf-tmux-url
   ];
 };
 
@@ -61,6 +61,7 @@ home.packages = with pkgs; [
 tmux
 zoxide
 lazygit
+openvpn
   ];
 
 }

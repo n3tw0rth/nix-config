@@ -14,6 +14,8 @@ in
       (import "${home-manager}/nixos")
     ];
 
+nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
 home-manager.useUserPackages = true;
 home-manager.useGlobalPkgs = true;
 home-manager.backupFileExtension = "backup";
@@ -82,7 +84,12 @@ kitty
 
    programs.firefox.enable = true;
   
-  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm = 
+{
+enable = true;
+    theme = "sddm-astronaut-theme";
+    extraPackages = [ pkgs.sddm-astronaut ];
+};
   services.displayManager.sddm.wayland.enable = true;
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
@@ -115,7 +122,7 @@ foot
 alacritty
  wl-clipboard # Copy/Paste functionality.
     mako # Notification utility.
-
+sddm-astronaut
 
 # lang-tools/compilers
 gcc
@@ -165,4 +172,5 @@ gcc
   system.stateVersion = "25.11"; # Did you read the comment?
 
 }
+
 
