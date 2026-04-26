@@ -19,6 +19,7 @@
   programs.bash = {
     enable = true;
     shellAliases = {
+      g = "git";
       ll = "ls -al";
       vi = "nvim";
       lg = "lazygit";
