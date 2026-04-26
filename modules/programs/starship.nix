@@ -1,0 +1,70 @@
+{ pkgs, ... }:
+
+{
+  home.packages = with pkgs; [
+    starship
+  ];
+
+  programs.starship = {
+    enable = true;
+
+    settings = {
+      format = ''
+        $sudo $directory $git_branch $git_state $git_status $cmd_duration $line_break $character'';
+
+      sudo = {
+
+        disabled = false;
+        format = "[$symbol]($style)";
+        style = "#9AA6B2";
+        symbol = "*";
+      };
+
+      directory = {
+        format = " [$path]($style)[$read_only]($read_only_style) ";
+        home_symbol = "~";
+        style = "#9AA6B2";
+        read_only = "ro";
+      };
+
+      character = {
+        success_symbol = "[ - ](purple)";
+        error_symbol = "[ - ](red)";
+        vimcmd_symbol = "[ - ](green)";
+      };
+
+      git_branch = {
+        format = "[$branch]($style)";
+        style = "#9AA6B2";
+      };
+
+      git_status = {
+        format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)";
+        style = "#9AA6B2";
+        conflicted = "";
+        untracked = "";
+        modified = "";
+        staged = "";
+        renamed = "";
+        deleted = "";
+        stashed = "≡";
+        ahead = "⇡\${count}";
+        diverged = "⇕⇡\${ahead_count}⇣\${behind_count}";
+        behind = "⇣\${count}";
+      };
+
+      git_state = {
+        format = "\([$state( $progress_current/$progress_total)]($style)\) ";
+        style = "bright-black";
+      };
+
+      cmd_duration = {
+        format = " took [$duration]($style) ";
+        style = "#B0BCC8";
+      };
+    };
+  };
+}
+
+
+

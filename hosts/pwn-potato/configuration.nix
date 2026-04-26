@@ -1,33 +1,33 @@
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
 { config, lib, pkgs, ... }:
 
 let
-  home-manager = builtins.fetchTarball https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz;
+  home-manager = builtins.fetchTarball {
+    url = https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz;
+    sha256 = "16mcnqpcgl3s2frq9if6vb8rpnfkmfxkz5kkkjwlf769wsqqg3i9";
+  };
 in
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
       (import "${home-manager}/nixos")
     ];
 
-nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-home-manager.useUserPackages = true;
-home-manager.useGlobalPkgs = true;
-home-manager.backupFileExtension = "backup";
-home-manager.users.n3tw0rth = import ./home.nix;
+  home-manager.useUserPackages = true;
+  home-manager.useGlobalPkgs = true;
+  home-manager.backupFileExtension = "backup";
+  home-manager.users.n3tw0rth = import ./home.nix;
 
-security.polkit.enable = true;
+  security.polkit.enable = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "quantum-potato"; 
+  networking.hostName = "pwn-potato";
 
   # Configure network connections interactively with nmcli or nmtui.
   networking.networkmanager.enable = true;
@@ -51,8 +51,6 @@ security.polkit.enable = true;
   # services.xserver.enable = true;
 
 
-  
-
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
@@ -72,31 +70,37 @@ security.polkit.enable = true;
   # services.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-   users.users.n3tw0rth = {
-     isNormalUser = true;
-     extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
-     packages = with pkgs; [
-       tree
-       vim
-kitty
-     ];
-   };
+  users.users.n3tw0rth = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    packages = with pkgs; [
+      tree
+      vim
+      kitty
+      gh
+    ];
+  };
 
-   programs.firefox.enable = true;
-  
-  services.displayManager.sddm = 
-{
-enable = true;
-    theme = "sddm-astronaut-theme";
-    extraPackages = [ pkgs.sddm-astronaut ];
-};
+  programs.firefox.enable = true;
+
+  services.displayManager.sddm =
+    {
+      enable = true;
+      theme = "sddm-astronaut-theme";
+      extraPackages = [ pkgs.sddm-astronaut ];
+    };
   services.displayManager.sddm.wayland.enable = true;
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
- environment.shells = [ pkgs.bash ];
+  environment.shells = [ pkgs.bash ];
+  environment.sessionVariables = {
+    TERMINAL = "alacritty";
+    NIXPKGS_ALLOW_UNFREE = 1;
+  };
 
-# Enables Gnome Keyring to store secrets for applications. 
+
+  # Enables Gnome Keyring to store secrets for applications. 
   services.gnome.gnome-keyring.enable = true;
 
   # Enable Sway.
@@ -105,28 +109,29 @@ enable = true;
     wrapperFeatures.gtk = true;
   };
 
-fonts.packages = with pkgs; [
-  nerd-fonts.jetbrains-mono
-];
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+  ];
 
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
-   environment.systemPackages = with pkgs; [
-git
-     vim 
-     wget
-kitty
-terminator
-foot
-alacritty
- wl-clipboard # Copy/Paste functionality.
-    mako # Notification utility.
-sddm-astronaut
+  environment.systemPackages = with pkgs; [
+    git
+    vim
+    wget
+    terminator
+    alacritty
+    xclip
+    wl-clipboard
+    mako
+    sddm-astronaut
+    polybar
+    just
 
-# lang-tools/compilers
-gcc
-   ];
+    # lang-tools/compilers
+    gcc
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
