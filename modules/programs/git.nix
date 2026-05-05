@@ -7,6 +7,7 @@
     userEmail = "40062006+n3tw0rth@users.noreply.github.com";
 
     aliases = {
+      a = "add";
       st = "status";
       co = "checkout";
       cm = "commit";

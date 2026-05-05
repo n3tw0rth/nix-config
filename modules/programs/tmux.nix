@@ -3,6 +3,7 @@
 
   home.packages = with pkgs; [
     tmux
+    sesh
   ];
 
   # imports = [ ./tmux/tmux-session-switcher/plugin.nix ];
@@ -96,11 +97,6 @@
       # clear all the history
       bind -n M-c send-keys C-l run-shell "tmux clear-history"
 
-      # yazi image preview
-      set -gq allow-passthrough on
-      set -ga update-environment TERM
-      set -ga update-environment TERM_PROGRAM
-
       # vim-tmux-navigator
       # set -g @vim_navigator_mapping_left "C-Left C-h"  # use C-h and C-Left
       # set -g @vim_navigator_mapping_right "C-Right C-l"
@@ -116,6 +112,10 @@
       bind c new-window -c "#{pane_current_path}"
       bind  %  split-window -h -c "#{pane_current_path}"
       bind '"' split-window -v -c "#{pane_current_path}"
+
+      bind-key -n M-t run-shell '
+        sesh connect $(sesh list | fzf-tmux -p) 
+      '
     '';
   };
 } 
