@@ -1,7 +1,9 @@
 { pkgs, ... }:
 
 {
-  imports = [ ./wordlists.nix ./hosts.nix ];
+  imports = [
+    ./wordlists.nix
+  ];
   home.packages = with pkgs; [
     # reconnaissance
     nmap
