@@ -79,6 +79,7 @@ in
       vim
       kitty
       gh
+      chromium
     ];
   };
 
@@ -120,6 +121,7 @@ in
     alacritty
     xclip
     wl-clipboard
+    slurp
     mako
     sddm-astronaut
     polybar
@@ -130,7 +132,7 @@ in
   ];
 
   networking.extraHosts = ''
-    10.129.245.50  kobold.htb
+    10.129.245.50  kobold.htb mcp.kobold.htb bin.kobold.htb
   '';
 
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .

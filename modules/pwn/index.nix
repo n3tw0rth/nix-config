@@ -10,6 +10,9 @@
     rustscan
     gobuster
     ffuf
+    netexec
+    burpsuite
+    caido
 
     # reversing
     radare2

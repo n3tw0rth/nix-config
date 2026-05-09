@@ -1,6 +1,7 @@
 { ... }:
 {
   imports = [
-   ./rust/rust.nix 
+    ./rust/rust.nix
+    ./python.nix
   ];
 }

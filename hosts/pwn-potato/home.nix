@@ -51,8 +51,6 @@
   programs.zoxide.enable = true;
 
   home.packages = with pkgs; [
-    python314
-
     swaybg
     tmux
     zoxide
@@ -62,7 +60,6 @@
     fzf
     ripgrep
 
-    burpsuite
     nmap
     nautilus
 
@@ -70,5 +67,7 @@
     moreutils
     bat
     pluma
+
+    postman
   ];
 }

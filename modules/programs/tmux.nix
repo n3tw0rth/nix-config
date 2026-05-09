@@ -90,7 +90,7 @@
       setw -g mode-keys vi
       setw -g mode-style "fg=colour1 bg=colour18 bold"
       bind -T copy-mode-vi v send-keys -X begin-selection
-      bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "xclip -in -selection clipboard"
+      bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "wl-copy"
 
       set -g mode-style "fg=colour0,bg=colour3"
 
