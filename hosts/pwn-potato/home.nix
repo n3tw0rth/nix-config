@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -47,6 +47,12 @@
     };
   };
 
+  wayland.windowManager.sway.config.keybindings =
+    lib.mkOptionDefault {
+      "Mod1+l" = "focus next sibling";
+      "Mod1+h" = "focus prev";
+    };
+
   programs.zoxide.enableBashIntegration = true;
   programs.zoxide.enable = true;
 
@@ -69,5 +75,6 @@
     pluma
 
     postman
+    waybar
   ];
 }

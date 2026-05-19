@@ -5,6 +5,10 @@ let
     url = https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz;
     sha256 = "1zvr96smn9xs56020424pfz91cxwlm8sv17rrav8qdhq670jm7qs";
   };
+
+  unstable = import (fetchTarball "https://nixos.org/channels/nixpkgs-unstable/nixexprs.tar.xz") {
+    config = config.nixpkgs.config;
+  };
 in
 {
   imports =
@@ -110,7 +114,6 @@ in
     nerd-fonts.jetbrains-mono
   ];
 
-
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
@@ -124,11 +127,11 @@ in
     slurp
     mako
     sddm-astronaut
-    polybar
     just
 
     # lang-tools/compilers
     gcc
+    unstable.claude-code
   ];
 
   networking.extraHosts = ''
