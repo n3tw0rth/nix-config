@@ -4,6 +4,7 @@
   imports = [
     ./wordlists.nix
   ];
+
   home.packages = with pkgs; [
     # reconnaissance
     nmap

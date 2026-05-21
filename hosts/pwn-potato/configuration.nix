@@ -132,11 +132,27 @@ in
     # lang-tools/compilers
     gcc
     unstable.claude-code
+
+    nixd
+    nixfmt
   ];
 
   networking.extraHosts = ''
     10.129.245.50  kobold.htb mcp.kobold.htb bin.kobold.htb
   '';
+
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    vips
+    glib
+    expat
+    fftw
+    orc
+    libjpeg
+    libpng
+    libwebp
+    libexif
+  ];
 
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "25.11"; # Did you read the comment?
