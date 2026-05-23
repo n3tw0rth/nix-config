@@ -1,29 +1,27 @@
-{ config, lib, pkgs, ... }:
-
-let
-  home-manager = builtins.fetchTarball {
-    url = https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz;
-    sha256 = "1zvr96smn9xs56020424pfz91cxwlm8sv17rrav8qdhq670jm7qs";
-  };
-
-  unstable = import (fetchTarball "https://nixos.org/channels/nixpkgs-unstable/nixexprs.tar.xz") {
-    config = config.nixpkgs.config;
-  };
-in
 {
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      (import "${home-manager}/nixos")
-    ];
+  config,
+  lib,
+  pkgs,
+  nix4nvchad,
+  ...
+}:
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+{
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
+
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   nixpkgs.config.allowUnfree = true;
 
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
   home-manager.backupFileExtension = "backup";
+  home-manager.extraSpecialArgs = { inherit nix4nvchad; };
   home-manager.users.n3tw0rth = import ./home.nix;
 
   security.polkit.enable = true;
@@ -55,7 +53,6 @@ in
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
 
-
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
@@ -77,7 +74,10 @@ in
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.n3tw0rth = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+    ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       tree
       vim
@@ -89,19 +89,18 @@ in
 
   programs.firefox.enable = true;
 
-  services.displayManager.sddm =
-    {
-      enable = true;
-      theme = "sddm-astronaut-theme";
-      extraPackages = [ pkgs.sddm-astronaut ];
-    };
+  services.displayManager.sddm = {
+    enable = true;
+    theme = "sddm-astronaut-theme";
+    extraPackages = [ pkgs.sddm-astronaut ];
+  };
   services.displayManager.sddm.wayland.enable = true;
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   environment.shells = [ pkgs.bash ];
 
-  # Enables Gnome Keyring to store secrets for applications. 
+  # Enables Gnome Keyring to store secrets for applications.
   services.gnome.gnome-keyring.enable = true;
 
   # Enable Sway.
@@ -120,7 +119,6 @@ in
     git
     vim
     wget
-    terminator
     alacritty
     xclip
     wl-clipboard
@@ -131,7 +129,7 @@ in
 
     # lang-tools/compilers
     gcc
-    unstable.claude-code
+    claude-code
 
     nixd
     nixfmt
@@ -139,6 +137,7 @@ in
 
   networking.extraHosts = ''
     10.129.245.50  kobold.htb mcp.kobold.htb bin.kobold.htb
+    10.129.2.115 wingdata.htb ftp.wingdata.htb
   '';
 
   programs.nix-ld.enable = true;
@@ -158,5 +157,3 @@ in
   system.stateVersion = "25.11"; # Did you read the comment?
 
 }
-
-

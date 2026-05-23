@@ -1,11 +1,19 @@
-{ config, pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   imports = [
     ../../modules/langs/index.nix
     ../../modules/programs/index.nix
-    ../../modules/pwn/index.nix
+    ../../modules/pwn/pwn.nix
+    ../../modules/common/common.nix
   ];
+
+  modules.pwn.enable = true;
+  modules.common.enable = true;
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -15,24 +23,6 @@
   home.stateVersion = "25.11";
 
   programs.home-manager.enable = true;
-
-  programs.bash = {
-    enable = true;
-    shellAliases = {
-      g = "git";
-      ll = "ls -al";
-      vi = "nvim";
-      lg = "lazygit";
-    };
-
-    bashrcExtra = ''
-      set -o vi
-
-      export EDITOR=nvim
-    '';
-  };
-
-  programs.neovim.enable = true;
 
   wayland.windowManager.sway = {
     enable = true;
@@ -47,11 +37,10 @@
     };
   };
 
-  wayland.windowManager.sway.config.keybindings =
-    lib.mkOptionDefault {
-      "Mod1+l" = "focus next sibling";
-      "Mod1+h" = "focus prev";
-    };
+  wayland.windowManager.sway.config.keybindings = lib.mkOptionDefault {
+    "Mod1+l" = "focus next sibling";
+    "Mod1+h" = "focus prev";
+  };
 
   programs.zoxide.enableBashIntegration = true;
   programs.zoxide.enable = true;
@@ -73,6 +62,7 @@
     moreutils
     bat
     pluma
+    unzip
 
     postman
     waybar

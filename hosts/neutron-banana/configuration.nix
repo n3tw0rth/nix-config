@@ -2,16 +2,12 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, nix4nvchad, ... }:
 
-let
-  home-manager = builtins.fetchTarball https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz;
-in
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      (import "${home-manager}/nixos")
     ];
 
 nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -19,6 +15,7 @@ nix.settings.experimental-features = [ "nix-command" "flakes" ];
 home-manager.useUserPackages = true;
 home-manager.useGlobalPkgs = true;
 home-manager.backupFileExtension = "backup";
+home-manager.extraSpecialArgs = { inherit nix4nvchad; };
 home-manager.users.n3tw0rth = import ./home.nix;
 
 security.polkit.enable = true;
@@ -117,7 +114,6 @@ git
      vim 
      wget
 kitty
-terminator
 foot
 alacritty
  wl-clipboard # Copy/Paste functionality.

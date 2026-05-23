@@ -6,5 +6,7 @@
     ./tmux.nix
     ./git.nix
     ./obsidian.nix
+    ./terminator.nix
+    ./kitty.nix
   ];
 }

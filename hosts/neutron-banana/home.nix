@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    ../../modules/common/nvim.nix
+  ];
+
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "n3tw0rth";
@@ -24,8 +28,6 @@ set -o vi
 export EDITOR=nvim
 '';
 };
-
-  programs.neovim.enable = true;
 
 wayland.windowManager.sway = {
     enable = true;
