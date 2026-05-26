@@ -8,5 +8,6 @@
     ./obsidian.nix
     ./terminator.nix
     ./kitty.nix
+    ./firefox.nix
   ];
 }

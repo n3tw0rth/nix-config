@@ -28,6 +28,7 @@
       jq
 
       inetutils # ftp, hostname, telnet etc..
+      btop
     ];
   };
 }

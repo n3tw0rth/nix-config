@@ -87,8 +87,6 @@
     ];
   };
 
-  programs.firefox.enable = true;
-
   services.displayManager.sddm = {
     enable = true;
     theme = "sddm-astronaut-theme";
@@ -137,7 +135,7 @@
 
   networking.extraHosts = ''
     10.129.245.50  kobold.htb mcp.kobold.htb bin.kobold.htb
-    10.129.2.115 wingdata.htb ftp.wingdata.htb
+    10.129.2.126 wingdata.htb ftp.wingdata.htb
   '';
 
   programs.nix-ld.enable = true;

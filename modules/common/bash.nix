@@ -13,6 +13,10 @@
       set -o vi
 
       export EDITOR=nvim
+
+      exip() {
+        export IP="$1"
+      }
     '';
   };
 }

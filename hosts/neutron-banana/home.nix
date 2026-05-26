@@ -14,57 +14,38 @@
 
   programs.home-manager.enable = true;
 
-  programs.bash = {
-	enable = true;
-	shellAliases = {
-      vi  = "nvim";
-      lg = "lazygit";
-};
-
-bashrcExtra = ''
-set -o vi
-
-
-export EDITOR=nvim
-'';
-};
-
-wayland.windowManager.sway = {
+  wayland.windowManager.sway = {
     enable = true;
     wrapperFeatures.gtk = true; # Fixes common issues with GTK 3 apps
     config = rec {
       modifier = "Mod1";
       # Use kitty as default terminal
-      terminal = "kitty"; 
+      terminal = "kitty";
       startup = [
-        # Launch Firefox on start
-        {command = "swaybg -i ~/Pictures/wallpaper.jpg";}
+        { command = "swaybg -i ~/Pictures/wallpaper.jpg"; }
       ];
     };
   };
 
+  programs.tmux = {
+    enable = true;
+    plugins = with pkgs; [
+      tmuxPlugins.sensible
+      tmuxPlugins.resurrect
+      tmuxPlugins.tmux-fzf
+      tmuxPlugins.fzf-tmux-url
+    ];
+  };
 
+  programs.zoxide.enableBashIntegration = true;
+  programs.zoxide.enable = true;
 
-programs.tmux = {
-  enable = true;
-  plugins = with pkgs; [
- tmuxPlugins.sensible
-  tmuxPlugins.resurrect
- tmuxPlugins.tmux-fzf
- tmuxPlugins.fzf-tmux-url
-  ];
-};
-
-programs.zoxide.enableBashIntegration= true;
-programs.zoxide.enable = true;
-
-home.packages = with pkgs; [
+  home.packages = with pkgs; [
     swaybg
-tmux
-zoxide
-lazygit
-openvpn
+    tmux
+    zoxide
+    lazygit
+    openvpn
   ];
 
 }
-
