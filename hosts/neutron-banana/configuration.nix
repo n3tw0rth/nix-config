@@ -2,23 +2,32 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, nix4nvchad, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  nix4nvchad,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
-nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
-home-manager.useUserPackages = true;
-home-manager.useGlobalPkgs = true;
-home-manager.backupFileExtension = "backup";
-home-manager.extraSpecialArgs = { inherit nix4nvchad; };
-home-manager.users.n3tw0rth = import ./home.nix;
+  home-manager.useUserPackages = true;
+  home-manager.useGlobalPkgs = true;
+  home-manager.backupFileExtension = "backup";
+  home-manager.extraSpecialArgs = { inherit nix4nvchad; };
+  home-manager.users.n3tw0rth = import ./home.nix;
 
-security.polkit.enable = true;
+  security.polkit.enable = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -47,9 +56,6 @@ security.polkit.enable = true;
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
 
-
-  
-
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
@@ -69,31 +75,33 @@ security.polkit.enable = true;
   # services.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-   users.users.n3tw0rth = {
-     isNormalUser = true;
-     extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
-     packages = with pkgs; [
-       tree
-       vim
-kitty
-     ];
-   };
+  users.users.n3tw0rth = {
+    isNormalUser = true;
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+    ]; # Enable ‘sudo’ for the user.
+    packages = with pkgs; [
+      tree
+      vim
+      kitty
+    ];
+  };
 
-   programs.firefox.enable = true;
-  
-  services.displayManager.sddm = 
-{
-enable = true;
+  programs.firefox.enable = true;
+
+  services.displayManager.sddm = {
+    enable = true;
     theme = "sddm-astronaut-theme";
     extraPackages = [ pkgs.sddm-astronaut ];
-};
+  };
   services.displayManager.sddm.wayland.enable = true;
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
- environment.shells = [ pkgs.bash ];
+  environment.shells = [ pkgs.bash ];
 
-# Enables Gnome Keyring to store secrets for applications. 
+  # Enables Gnome Keyring to store secrets for applications.
   services.gnome.gnome-keyring.enable = true;
 
   # Enable Sway.
@@ -102,27 +110,26 @@ enable = true;
     wrapperFeatures.gtk = true;
   };
 
-fonts.packages = with pkgs; [
-  nerd-fonts.jetbrains-mono
-];
-
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+  ];
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
-   environment.systemPackages = with pkgs; [
-git
-     vim 
-     wget
-kitty
-foot
-alacritty
- wl-clipboard # Copy/Paste functionality.
+  environment.systemPackages = with pkgs; [
+    git
+    vim
+    wget
+    kitty
+    foot
+    alacritty
+    wl-clipboard # Copy/Paste functionality.
     mako # Notification utility.
-sddm-astronaut
+    sddm-astronaut
 
-# lang-tools/compilers
-gcc
-   ];
+    # lang-tools/compilers
+    gcc
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -168,5 +175,3 @@ gcc
   system.stateVersion = "25.11"; # Did you read the comment?
 
 }
-
-

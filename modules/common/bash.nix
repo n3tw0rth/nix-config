@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   programs.bash = {
     enable = true;
@@ -7,6 +7,7 @@
       ll = "ls -al";
       vi = "nvim";
       lg = "lazygit";
+      sss = "systemctl suspend";
     };
 
     bashrcExtra = ''
@@ -19,4 +20,14 @@
       }
     '';
   };
+
+  home.packages = [
+    (pkgs.writeShellScriptBin "run.pwn-web" ''
+      swaymsg 'workspace 3; exec caido-desktop'
+    '')
+
+    (pkgs.writeShellScriptBin "run.dev" ''
+      swaymsg 'workspace 3; exec postman'
+    '')
+  ];
 }

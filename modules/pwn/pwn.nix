@@ -5,11 +5,13 @@
   ...
 }:
 {
-  options.modules.pwn.enable = lib.mkEnableOption "CTF and Cybersecurity tools";
 
   imports = [
     ./wordlists.nix
+    ./ghidra.nix
   ];
+
+  options.modules.pwn.enable = lib.mkEnableOption "CTF and Cybersecurity tools";
 
   config = lib.mkIf config.modules.pwn.enable {
     home.packages = with pkgs; [
@@ -24,7 +26,8 @@
 
       # reversing
       radare2
-      ghidra
+      ltrace
+      strace
 
       # misc
       python313Packages.impacket
@@ -33,6 +36,9 @@
       hashid
       hashcat
       john
+
+      #bruteforce
+      sqlmap
     ];
   };
 }

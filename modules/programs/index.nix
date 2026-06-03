@@ -9,5 +9,6 @@
     ./terminator.nix
     ./kitty.nix
     ./firefox.nix
+    ./yazi.nix
   ];
 }

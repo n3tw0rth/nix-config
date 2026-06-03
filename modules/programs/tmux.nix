@@ -1,6 +1,5 @@
 { pkgs, ... }:
 {
-
   home.packages = with pkgs; [
     tmux
     sesh
@@ -17,6 +16,7 @@
           resurrect_dir="$HOME/.tmux/resurrect"
           set -g @resurrect-dir $resurrect_dir
           set -g @resurrect-hook-post-save-all 'target=$(readlink -f $resurrect_dir/last); ...'
+          set -g @resurrect-processes 'vim nvim'
         '';
       }
       {
@@ -118,4 +118,4 @@
       '
     '';
   };
-} 
+}

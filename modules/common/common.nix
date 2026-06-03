@@ -16,19 +16,19 @@
 
   config = lib.mkIf config.modules.common.enable {
 
-    # Common tools
     home.packages = with pkgs; [
+      bat
+      brave
+      btop
+      eza
+      fd
+      fzf
+      file
+      inetutils # ftp, hostname, telnet etc..
+      jq
       nixd
       nixfmt-rfc-style
       ripgrep
-      fd
-      fzf
-      bat
-      eza
-      jq
-
-      inetutils # ftp, hostname, telnet etc..
-      btop
     ];
   };
 }

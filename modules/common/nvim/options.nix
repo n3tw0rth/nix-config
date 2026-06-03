@@ -14,6 +14,7 @@
     ":let @+ = expand('%') . ':' . line('.')<cr>",
     { desc = "Shortcut Copy filepath and line number" }
   )
+  vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
 
   require("nvim-tree").setup {
     sort = {
@@ -77,7 +78,17 @@
         },
       },
     },
-    nixd= {}
+    nixd= {},
+    harper_ls = {
+      settings = {
+          ["harper-ls"] = {
+            linters = {
+              SentenceCapitalization = true,
+              SpellCheck = true
+            }
+          }
+        }
+    }
   }
 
   for name, opts in pairs(servers) do

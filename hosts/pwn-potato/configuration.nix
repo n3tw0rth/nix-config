@@ -136,6 +136,7 @@
   networking.extraHosts = ''
     10.129.245.50  kobold.htb mcp.kobold.htb bin.kobold.htb
     10.129.2.126 wingdata.htb ftp.wingdata.htb
+    10.129.5.147 cctv.htb
   '';
 
   programs.nix-ld.enable = true;
