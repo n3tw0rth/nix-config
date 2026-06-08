@@ -16,6 +16,23 @@
   )
   vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
 
+
+  vim.keymap.set("n", "<leader>gG", require("telescope.builtin").git_branches, { desc = "Telescope Checkout git branch" })
+  vim.keymap.set("n", "<leader>gs", require("telescope.builtin").git_status, { desc = "Telescope Open current modified files" })
+  vim.keymap.set("n", "<leader>fr", require("telescope.builtin").resume, { desc = "Telescope Resume the previous picker" })
+  vim.keymap.set("n", "<leader>fm", require("telescope.builtin").marks, { desc = "Telescope Show marks" })
+  vim.keymap.set("n", "<leader>fs", require("telescope.builtin").grep_string, { desc = "Telescope Grep string under cursor" })
+  vim.keymap.set("n", "<leader>fi", require("telescope.builtin").lsp_implementations, { desc = "Telescope Show implementations" })
+  vim.keymap.set(
+    "n",
+    "<leader>fw",
+    ":lua require('telescope.builtin').live_grep({ additional_args = function() return { '--hidden' } end })<cr>",
+    { silent = true, desc = "Telescope Find in  All Files" }
+  )
+
+
+
+
   require("nvim-tree").setup {
     sort = {
       sorter = "case_sensitive",
@@ -112,4 +129,14 @@
       lsp_fallback = true,
     },
   })
+
+  vim.lsp.config['harper'] = {
+      cmd = { 'harper-ls', '--stdio' },
+      filetypes = { 'markdown', 'text', 'tex', 'typst' },
+      root_dir = function()
+          return vim.fn.getcwd()
+      end,
+  }
+  vim.lsp.enable('harper')
+
 ''
