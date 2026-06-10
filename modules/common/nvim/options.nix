@@ -1,3 +1,4 @@
+{ pkgs }:
 ''
   -- Custom vim options
   vim.opt.relativenumber = true
@@ -88,6 +89,7 @@
             buildScripts = {
               enable = true,
             },
+            sysrootSrc = "${pkgs.rustPlatform.rustLibSrc}",
           },
           procMacro = {
             enable = true,

@@ -1,4 +1,4 @@
-{ nix4nvchad, ... }:
+{ nix4nvchad, pkgs, ... }:
 {
   imports = [ nix4nvchad.homeManagerModules.default ];
 
@@ -6,7 +6,7 @@
     enable = true;
     backup = false;
 
-    extraConfig = import ./nvim/options.nix;
+    extraConfig = (import ./nvim/options.nix) { inherit pkgs; };
     extraPlugins = import ./nvim/plugins.nix;
     chadrcConfig = import ./nvim/chadrc.nix;
   };
