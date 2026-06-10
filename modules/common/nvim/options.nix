@@ -96,16 +96,6 @@
       },
     },
     nixd= {},
-    harper_ls = {
-      settings = {
-          ["harper-ls"] = {
-            linters = {
-              SentenceCapitalization = true,
-              SpellCheck = true
-            }
-          }
-        }
-    }
   }
 
   for name, opts in pairs(servers) do
@@ -130,13 +120,21 @@
     },
   })
 
-  vim.lsp.config['harper'] = {
+  vim.lsp.config('harper_ls', {
       cmd = { 'harper-ls', '--stdio' },
-      filetypes = { 'markdown', 'text', 'tex', 'typst' },
+      filetypes = { 'markdown' },
       root_dir = function()
           return vim.fn.getcwd()
       end,
-  }
-  vim.lsp.enable('harper')
+      settings = {
+          ["harper-ls"] = {
+            linters = {
+              SentenceCapitalization = true,
+              SpellCheck = true,
+            }
+          }
+        }
+  })
+  vim.lsp.enable('harper_ls')
 
 ''
