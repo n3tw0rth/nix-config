@@ -32,7 +32,7 @@
       # Use kitty as default terminal
       terminal = "terminator";
       startup = [
-        { command = "swaybg -i ~/Pictures/wallpaper.jpg"; }
+        { command = "swaybg -i ~/Pictures/wallpaper.png"; }
       ];
     };
   };
@@ -58,7 +58,6 @@
     nmap
     nautilus
 
-    killall # dependecy used in polybar launch.sh
     moreutils
     bat
     pluma
@@ -66,5 +65,6 @@
 
     postman
     waybar
+    glibc.dev
   ];
 }
