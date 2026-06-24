@@ -17,6 +17,7 @@
   config = lib.mkIf config.modules.common.enable {
 
     home.packages = with pkgs; [
+      vscode
       bat
       brave
       btop
