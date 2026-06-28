@@ -66,5 +66,6 @@
     postman
     waybar
     glibc.dev
+    gcr
   ];
 }
