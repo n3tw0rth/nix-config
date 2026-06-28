@@ -10,6 +10,6 @@
     ./kitty.nix
     ./firefox.nix
     ./yazi.nix
-    ./gammatep.nix
+    ./wlsunset.nix
   ];
 }
