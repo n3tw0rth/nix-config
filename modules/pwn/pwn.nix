@@ -31,6 +31,7 @@
 
       # misc
       python313Packages.impacket
+      metasploit
 
       # crack
       hashid
