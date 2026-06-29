@@ -32,8 +32,17 @@
 
   networking.hostName = "pwn-potato";
 
+  networking.extraHosts = ''
+    10.129.244.106 wingdata.htb ftp.wingdata.htb
+  '';
+
   # Configure network connections interactively with nmcli or nmtui.
   networking.networkmanager.enable = true;
+
+  networking.firewall.allowedTCPPorts = [
+    4444
+    4500
+  ];
 
   # Set your time zone.
   time.timeZone = "Asia/Colombo";
@@ -132,12 +141,6 @@
     nixd
     nixfmt
   ];
-
-  networking.extraHosts = ''
-    10.129.245.50  kobold.htb mcp.kobold.htb bin.kobold.htb
-    10.129.2.126 wingdata.htb ftp.wingdata.htb
-    10.129.5.147 cctv.htb
-  '';
 
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
