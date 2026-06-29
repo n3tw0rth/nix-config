@@ -10,6 +10,7 @@
     ../../modules/programs/index.nix
     ../../modules/pwn/pwn.nix
     ../../modules/common/common.nix
+    ../../modules/dev/dev.nix
   ];
 
   modules.pwn.enable = true;
