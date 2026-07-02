@@ -42,6 +42,7 @@
   networking.firewall.allowedTCPPorts = [
     4444
     4500
+    1337
   ];
 
   # Set your time zone.
