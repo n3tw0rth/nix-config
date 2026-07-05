@@ -8,7 +8,7 @@
     enable = true;
 
     temperature = {
-      day = 3500;
+      day = 6500;
       night = 3000;
     };
 
