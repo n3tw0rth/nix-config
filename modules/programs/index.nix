@@ -5,7 +5,6 @@
     ./starship.nix
     ./tmux.nix
     ./git.nix
-    ./obsidian.nix
     ./terminator.nix
     ./kitty.nix
     ./firefox.nix
