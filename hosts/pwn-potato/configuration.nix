@@ -137,8 +137,6 @@
     sddm-astronaut
     just
 
-    # lang-tools/compilers
-    gcc
     claude-code
 
     nixd

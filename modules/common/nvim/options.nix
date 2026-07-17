@@ -66,7 +66,9 @@
     phpactor = {},
     ts_ls = {},
     pyright = {},
-    clangd = {},
+    clangd = {
+      cmd = { "${pkgs.clang-tools}/bin/clangd" },
+    },
     terraformls = {},
     gopls = {},
     astro = {},
