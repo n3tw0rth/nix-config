@@ -40,9 +40,11 @@
   networking.networkmanager.enable = true;
 
   networking.firewall.allowedTCPPorts = [
+    22
     4444
     4500
     1337
+    8000
   ];
 
   # Set your time zone.
