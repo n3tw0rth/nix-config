@@ -32,12 +32,12 @@
     in
     {
       nixosConfigurations = {
-        neutron-banana = nixpkgs.lib.nixosSystem {
+        wage-potato = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit nix4nvchad; };
           modules = [
             home-manager.nixosModules.home-manager
-            ./hosts/neutron-banana/configuration.nix
+            ./hosts/wage-potato/configuration.nix
             { nixpkgs.overlays = [ overlay-john-fix ]; }
           ];
         };
