@@ -20,14 +20,4 @@
       }
     '';
   };
-
-  home.packages = [
-    (pkgs.writeShellScriptBin "run.pwn-web" ''
-      swaymsg 'workspace 3; exec caido-desktop'
-    '')
-
-    (pkgs.writeShellScriptBin "run.dev" ''
-      swaymsg 'workspace 3; exec postman'
-    '')
-  ];
 }
