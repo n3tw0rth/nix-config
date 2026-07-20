@@ -97,13 +97,6 @@
       # clear all the history
       bind -n M-c send-keys C-l run-shell "tmux clear-history"
 
-      # vim-tmux-navigator
-      # set -g @vim_navigator_mapping_left "C-Left C-h"  # use C-h and C-Left
-      # set -g @vim_navigator_mapping_right "C-Right C-l"
-      # set -g @vim_navigator_mapping_up "C-k"
-      # set -g @vim_navigator_mapping_down "C-j"
-      # set -g @vim_navigator_mapping_prev ""  # removes the C-\ binding
-
       # Shift arrow to switch windows
       bind -n C-p  previous-window
       bind -n C-n next-window

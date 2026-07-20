@@ -9,6 +9,7 @@
 
   -- Custom keymaps
   vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Plugin Open parent directory" })
+  vim.keymap.set("n", "_", "<CMD>Keeper<CR>", { desc = "Open Keeper" })
   vim.keymap.set(
     "n",
     "<leader>l",
@@ -30,9 +31,6 @@
     ":lua require('telescope.builtin').live_grep({ additional_args = function() return { '--hidden' } end })<cr>",
     { silent = true, desc = "Telescope Find in  All Files" }
   )
-
-
-
 
   require("nvim-tree").setup {
     sort = {
