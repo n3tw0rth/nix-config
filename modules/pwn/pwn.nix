@@ -9,6 +9,7 @@
   imports = [
     ./wordlists.nix
     ./ghidra.nix
+    ./bash.nix
   ];
 
   options.modules.pwn.enable = lib.mkEnableOption "CTF and Cybersecurity tools";
