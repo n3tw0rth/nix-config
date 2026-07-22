@@ -10,6 +10,7 @@
   imports = [
     ./bash.nix
     ./nvim.nix
+    ./atuin.nix
   ];
 
   options.modules.common.enable = lib.mkEnableOption "shell, aliases, and editor config";
