@@ -47,6 +47,9 @@
     8000
   ];
 
+  services.rpcbind.enable = true;
+  boot.supportedFilesystems = [ "nfs" ];
+
   # Set your time zone.
   time.timeZone = "Asia/Colombo";
 
@@ -141,6 +144,7 @@
 
     nixd
     nixfmt
+    nfs-utils
   ];
 
   programs.nix-ld.enable = true;
