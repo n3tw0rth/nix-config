@@ -33,6 +33,7 @@
       # misc
       python313Packages.impacket
       metasploit
+      wireshark
 
       # crack
       hashid
