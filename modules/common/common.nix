@@ -31,6 +31,7 @@
       nixfmt-rfc-style
       ripgrep
       gparted
+      openssl
     ];
   };
 }
