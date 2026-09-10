@@ -38,6 +38,8 @@
     };
   };
 
+  # Waybar (the swaybar replacement) lives in modules/common/waybar.nix.
+
   wayland.windowManager.sway.config.keybindings = lib.mkOptionDefault {
     "Mod1+l" = "focus next sibling";
     "Mod1+h" = "focus prev";
@@ -65,7 +67,6 @@
     unzip
 
     postman
-    waybar
     glibc.dev
     gcr
   ];
