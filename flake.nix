@@ -29,6 +29,21 @@
           };
         });
       };
+
+      # Pin claude-code ahead of nixpkgs to the latest upstream release.
+      # Only this package is overridden; the rest of nixpkgs stays on the lock.
+      # To bump: change `version`, then run
+      #   nix store prefetch-file "https://downloads.claude.ai/claude-code-releases/<version>/linux-x64/claude"
+      # and paste the printed hash below.
+      overlay-claude-latest = final: prev: {
+        claude-code = prev.claude-code.overrideAttrs (old: rec {
+          version = "2.1.280";
+          src = prev.fetchurl {
+            url = "https://downloads.claude.ai/claude-code-releases/${version}/linux-x64/claude";
+            hash = "sha256-HghQPb3zwssNcG0y80CCdziNHHbvEIZz6P5CwbMikls=";
+          };
+        });
+      };
     in
     {
       nixosConfigurations = {
@@ -38,7 +53,7 @@
           modules = [
             home-manager.nixosModules.home-manager
             ./hosts/wage-potato/configuration.nix
-            { nixpkgs.overlays = [ overlay-john-fix ]; }
+            { nixpkgs.overlays = [ overlay-john-fix overlay-claude-latest ]; }
           ];
         };
 
@@ -48,7 +63,7 @@
           modules = [
             home-manager.nixosModules.home-manager
             ./hosts/pwn-potato/configuration.nix
-            { nixpkgs.overlays = [ overlay-john-fix ]; }
+            { nixpkgs.overlays = [ overlay-john-fix overlay-claude-latest ]; }
           ];
         };
 
